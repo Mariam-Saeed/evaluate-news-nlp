@@ -1,14 +1,21 @@
 body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #6a62d2;
 }
 
 main {
-    flex: 2;
+  flex: 2;
 }
 
 section {
-    max-width: 800px;
-    margin: 50px auto;
+  max-width: 800px;
+  margin: 50px auto;
+}
+
+@media only screen and (max-width: 800px) {
+  section {
+    width: 90%;
+  }
 }

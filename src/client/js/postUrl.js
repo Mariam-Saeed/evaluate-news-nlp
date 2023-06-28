@@ -6,6 +6,7 @@ const postURL = async (data, URL) => {
     headers: {
       'Content-Type': 'application/json',
     },
+    mode: 'cors',
     body: JSON.stringify(data),
   });
   try {

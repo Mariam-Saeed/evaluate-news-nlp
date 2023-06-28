@@ -17,11 +17,12 @@ app.use(cors());
 
 app.use(express.static('dist'));
 
+const URL = 'https://api.meaningcloud.com/sentiment-2.1';
+
 console.log(__dirname);
 
 app.get('/', function (req, res) {
   res.sendFile('dist/index.html');
-  // res.sendFile(path.resolve('src/client/views/index.html'));
 });
 
 // designates what port the app will listen to for incoming requests
@@ -29,49 +30,62 @@ app.listen(8080, function () {
   console.log('Example app listening on port 8080!');
 });
 
-// app.get('/test', function (req, res) {
-//   res.send(mockAPIResponse);
-// });
-
 console.log(`Your API key is ${process.env.API_KEY}`);
 
-// let url;
+let info;
 
-app.post('/addUrl', (req, res) => {
-  console.log(`post request`);
-  const data = req.body;
-  const url = data;
-  console.log(url);
-});
+const createFormData = () => {
+  const formData = new FormData();
+  formData.append('key', 'fb4f28fea957a61e81d7b1c05f0bc826');
+  formData.append(info.type, info.value);
+  formData.append('lang', 'auto');
+  return formData;
+};
 
-const formData = new FormData();
-formData.append('key', 'fb4f28fea957a61e81d7b1c05f0bc826');
-formData.append(
-  'txt',
-  'Main dishes were quite good, but desserts were too sweet for me'
-);
-// formData.append(
-//   'url',
-//   'https://dev.to/integridsolutions/style-position-fixed-in-a-better-way-169g'
-// );
-formData.append('lang', 'auto');
+const resObj = {};
 
 const fetchApi = async (URL) => {
+  const formData = createFormData();
   const res = await fetch(URL, {
     method: 'POST',
     body: formData,
     redirect: 'follow',
   });
   try {
-    mockAPIResponse = await res.json();
-    console.log(mockAPIResponse);
+    const data = await res.json();
+    console.log(data.status.msg);
+    if (
+      data.status.msg === 'Operation denied' ||
+      data.status.msg === 'unknown language'
+    ) {
+      resObj.msg = false;
+      resObj.text = '';
+      resObj.subjectivity = '';
+      resObj.confidence = '';
+      resObj.polarity = '';
+    } else {
+      resObj.msg = true;
+      resObj.text = data.sentence_list[0].text;
+      resObj.subjectivity = data.subjectivity;
+      resObj.confidence = data.confidence;
+      resObj.polarity = data.score_tag;
+    }
+    // console.log(resObj);
   } catch (error) {
     console.log(error.message);
   }
 };
 
-// fetchApi('https://api.meaningcloud.com/sentiment-2.1');
+app.post('/addUrl', (req, res) => {
+  // console.log(`post request`);
+  const data = req.body;
+  info = data;
+  console.log(info);
+});
 
-// app.get('/test', function (req, res) {
-//   res.send(mockAPIResponse);
-// });
+app.get('/getData', function (req, res) {
+  fetchApi(URL).then(() => {
+    console.log(resObj);
+    res.send(resObj);
+  });
+});

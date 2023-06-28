@@ -20,25 +20,26 @@
                 <h1>Text Analysis</h1>
             </div>
         </nav>
-
-        <div class="">
-            navigation
-        </div>
     </header>
 
     <main>
         <section>
-            <form class="">
-                <label for="url">Type a URL to analyze</label>
-                <input id="url" type="url" name="input" placeholder="URL" required>
-                <input type="submit" id="btn" value="submit">
+            <form>
+                <label for="input">Type a URL or text to analyze</label>
+                <input id="input" type="text" required />
+                <input type="submit" id="btn" value="Submit" />
                 <p id="warn"></p>
             </form>
         </section>
 
         <section>
-            <p>Form Results:</p>
-            <div id="results"></div>
+            <!-- <p>Form Results:</p> -->
+            <div id="results">
+                <p class="result">Polarity: <span id="polarity"></span> </p>
+                <p class="result">Subjectivity: <span id="subjectivity"></span></p>
+                <p class="result">Confidence: <span id="confidence"></span></p>
+                <p class="result-text">Text except: <span id="text-except"></span></p>
+            </div>
         </section>
     </main>
 
@@ -46,7 +47,15 @@
         <p>©2023 All rights reserved</p>
     </footer>
 
-    <!-- <script src="../index.js"></script> -->
+    <script>
+        // Check that service workers are supported
+        if ('serviceWorker' in navigator) {
+            // Use the window load event to keep the page load performant
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js');
+            });
+        }
+    </script>
 </body>
 
 </html>
