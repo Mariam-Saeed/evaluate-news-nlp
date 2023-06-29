@@ -36,7 +36,7 @@ let info;
 
 const createFormData = () => {
   const formData = new FormData();
-  formData.append('key', 'fb4f28fea957a61e81d7b1c05f0bc826');
+  formData.append('key', process.env.API_KEY);
   formData.append(info.type, info.value);
   formData.append('lang', 'auto');
   return formData;
