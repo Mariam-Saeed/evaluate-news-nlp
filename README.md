@@ -19,6 +19,7 @@ A web tool that allows users to run Natural Language Processing (NLP) on article
 - Build tool - Webpack.
 - External script - Service Worker
 - External API - MeaningCloud API
+- Unit testing - Jest
 
 ## Installation
 
