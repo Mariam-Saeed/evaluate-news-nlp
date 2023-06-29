@@ -13,7 +13,7 @@ A web tool that allows users to run Natural Language Processing (NLP) on article
 - [Installation](#installation)
 - [Run project](#running-the-project)
 - [Screenshot](#screenshot)
-- [Development](#development)
+<!-- - [Development](#development) -->
 
 ## Built With
 
@@ -53,8 +53,9 @@ A web tool that allows users to run Natural Language Processing (NLP) on article
 ## Screenshot
 
 - Desktop screen
-  <img src="./screen%20images/empty.png"/>
-  <img src="./screen%20images/response.png" />
+  ![demo](./screen%20images/empty.png)
+  ![response](./screen%20images/response.png)
+  ![error](./screen%20images/error.png)
 
 - Mobile screen
-  <img src="./screen%20images/responsive.png" />
+  ![responsive](./screen%20images/responsive.png)
