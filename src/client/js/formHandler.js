@@ -1,10 +1,34 @@
-import { postURL } from './postUrl';
-import { updateUI } from './updateUi';
+import { postInputValue } from './postInputValue';
+import { getData } from './getData';
+
+const polarityEl = document.getElementById('polarity');
+const subjectivityEl = document.getElementById('subjectivity');
+const confidenceEl = document.getElementById('confidence');
+const textExceptEl = document.getElementById('text-except');
+const polarity = {
+  'P+': 'strong positive',
+  P: 'positive',
+  NEU: 'neutral',
+  N: 'negative',
+  'N+': 'strong negative',
+  NONE: 'without polarity',
+};
+
+const updateUI = (data) => {
+  console.log(data);
+  polarityEl.textContent = polarity[data.polarity];
+  subjectivityEl.textContent = data.subjectivity.toLowerCase();
+  confidenceEl.textContent = data.confidence;
+  textExceptEl.textContent = data.text;
+};
 
 const p = document.getElementById('warn');
-const info = {};
+const displayWarn = () => {
+  p.textContent = 'Plz enter a valid URL or text';
+};
 
 const inputChecker = (value) => {
+  const info = {};
   if (value.startsWith('http')) {
     info.type = 'url';
     info.value = value;
@@ -13,6 +37,7 @@ const inputChecker = (value) => {
     info.value = value;
   }
   console.log(info);
+  return info;
 };
 
 const handleChange = () => {
@@ -24,23 +49,9 @@ const handleSubmit = (event) => {
   event.preventDefault();
 
   const inputValue = document.getElementById('input').value;
-  inputChecker(inputValue);
+  const info = inputChecker(inputValue);
 
-  postURL(info, 'http://localhost:8080/addUrl').then(getData());
-
-  console.log('::: Form Submitted :::');
+  postInputValue(info, 'http://localhost:8080/addUrl').then(getData());
 };
 
-const getData = async () => {
-  const res = await fetch('http://localhost:8080/getData');
-  try {
-    const data = await res.json();
-    if (!data.msg) p.textContent = 'Plz enter a valid URL or text';
-    updateUI(data);
-    console.log(data);
-  } catch (err) {
-    console.log(err.message);
-  }
-};
-
-export { handleSubmit, handleChange };
+export { handleSubmit, handleChange, inputChecker, updateUI, displayWarn };

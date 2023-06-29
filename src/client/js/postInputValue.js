@@ -1,5 +1,5 @@
 //* Function to POST data
-const postURL = async (data, URL) => {
+const postInputValue = async (data, URL) => {
   const res = await fetch(URL, {
     method: 'POST',
     credentials: 'same-origin',
@@ -17,4 +17,4 @@ const postURL = async (data, URL) => {
   }
 };
 
-export { postURL };
+export { postInputValue };

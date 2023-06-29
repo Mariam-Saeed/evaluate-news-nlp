@@ -18,7 +18,7 @@ A web tool that allows users to run Natural Language Processing (NLP) on article
 - Web application framework for routing - Express
 - Build tool - Webpack.
 - External script - Service Worker
-- External API - Sentiment Analysis
+- External API - MeaningCloud API
 
 ## Installation
 

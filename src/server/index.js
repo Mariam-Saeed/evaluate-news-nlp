@@ -54,21 +54,19 @@ const fetchApi = async (URL) => {
   try {
     const data = await res.json();
     console.log(data.status.msg);
-    if (
-      data.status.msg === 'Operation denied' ||
-      data.status.msg === 'unknown language'
-    ) {
-      resObj.msg = false;
-      resObj.text = '';
-      resObj.subjectivity = '';
-      resObj.confidence = '';
-      resObj.polarity = '';
-    } else {
+    if (data.status.msg === 'OK') {
       resObj.msg = true;
       resObj.text = data.sentence_list[0].text;
       resObj.subjectivity = data.subjectivity;
       resObj.confidence = data.confidence;
       resObj.polarity = data.score_tag;
+      console.log(data.sentence_list);
+    } else {
+      resObj.msg = false;
+      resObj.text = '';
+      resObj.subjectivity = '';
+      resObj.confidence = '';
+      resObj.polarity = '';
     }
     // console.log(resObj);
   } catch (error) {

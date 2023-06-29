@@ -11,8 +11,11 @@ import './styles/results.scss';
 
 const btn = document.getElementById('btn');
 const inputEl = document.getElementById('input');
+const form = document.getElementById('form');
 
-btn.addEventListener('click', handleSubmit);
-inputEl.addEventListener('change', handleChange);
+form.addEventListener('submit', handleSubmit);
+// btn.addEventListener('click', handleSubmit);
+
+inputEl.addEventListener('click', handleChange);
 
 // export { checkForURL, handleSubmit };
