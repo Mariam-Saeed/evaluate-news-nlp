@@ -32,3 +32,4 @@ A web tool that allows users to run Natural Language Processing (NLP) on article
    `npm install`
 
 4. Create `.env` file in project directory and enter your api key in this file
+   "optimize-css-assets-webpack-plugin": "^6.0.1",
