@@ -2,15 +2,18 @@
 
 A web tool that allows users to run Natural Language Processing (NLP) on articles or blogs found on other websites.
 
-## [DEMO](https://mariam-saeed.github.io/Landing-Page/)
+<!-- ## [DEMO]() -->
 
 ## Table of Contents
 
+<!-- - [Demo](#demo) -->
+
 - [Title](#text-analysis)
-- [Demo](#demo)
-- [Features](#features)
-- [Development](#development)
+- [Built with](#built-with)
 - [Installation](#installation)
+- [Run project](#running-the-project)
+- [Screenshot](#screenshot)
+- [Development](#development)
 
 ## Built With
 
@@ -32,4 +35,26 @@ A web tool that allows users to run Natural Language Processing (NLP) on article
    `npm install`
 
 4. Create `.env` file in project directory and enter your api key in this file
-   "optimize-css-assets-webpack-plugin": "^6.0.1",
+
+## Running the project
+
+- To run the project in dev mode
+  `npm run build-dev`
+
+- To run the project in production mode
+  `npm run build-prod`
+
+- To Start the server at port 8080
+  `npm run start`
+- Open the project at http://localhost:8080/
+- To run tests
+  `npm run test`
+
+## Screenshot
+
+- Desktop screen
+  <img src="./screen%20images/empty.png"/>
+  <img src="./screen%20images/response.png" />
+
+- Mobile screen
+  <img src="./screen%20images/responsive.png" />
