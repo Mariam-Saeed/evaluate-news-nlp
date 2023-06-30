@@ -2,7 +2,6 @@ const dotenv = require('dotenv');
 dotenv.config();
 var path = require('path');
 const express = require('express');
-let mockAPIResponse = require('./mockAPI.js');
 
 const app = express();
 
@@ -16,8 +15,6 @@ const cors = require('cors');
 app.use(cors());
 
 app.use(express.static('dist'));
-
-const URL = 'https://api.meaningcloud.com/sentiment-2.1';
 
 console.log(__dirname);
 
@@ -34,33 +31,27 @@ console.log(`Your API key is ${process.env.API_KEY}`);
 
 let info;
 
-const createFormData = () => {
-  const formData = new FormData();
-  formData.append('key', process.env.API_KEY);
-  formData.append(info.type, info.value);
-  formData.append('lang', 'auto');
-  return formData;
-};
-
 const resObj = {};
 
+const formUrlLink = (info) => {
+  return `https://api.meaningcloud.com/sentiment-2.1?key=${process.env.API_KEY}&lang=auto&${info.type}=${info.value}`;
+};
+
 const fetchApi = async (URL) => {
-  const formData = createFormData();
   const res = await fetch(URL, {
     method: 'POST',
-    body: formData,
     redirect: 'follow',
   });
   try {
     const data = await res.json();
-    console.log(data.status.msg);
+    // console.log(data.status.msg);
     if (data.status.msg === 'OK') {
       resObj.msg = true;
       resObj.text = data.sentence_list[0].text;
       resObj.subjectivity = data.subjectivity;
       resObj.confidence = data.confidence;
       resObj.polarity = data.score_tag;
-      console.log(data.sentence_list);
+      // console.log(data.sentence_list);
     } else {
       resObj.msg = false;
       resObj.text = '';
@@ -75,15 +66,14 @@ const fetchApi = async (URL) => {
 };
 
 app.post('/addUrl', (req, res) => {
-  // console.log(`post request`);
   const data = req.body;
   info = data;
-  console.log(info);
 });
 
 app.get('/getData', function (req, res) {
+  const URL = formUrlLink(info);
   fetchApi(URL).then(() => {
-    console.log(resObj);
+    // console.log(resObj);
     res.send(resObj);
   });
 });

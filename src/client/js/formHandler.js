@@ -15,7 +15,6 @@ const polarity = {
 };
 
 const updateUI = (data) => {
-  console.log(data);
   polarityEl.textContent = polarity[data.polarity];
   subjectivityEl.textContent = data.subjectivity.toLowerCase();
   confidenceEl.textContent = data.confidence;
@@ -36,12 +35,10 @@ const inputChecker = (value) => {
     info.type = 'txt';
     info.value = value;
   }
-  console.log(info);
   return info;
 };
 
 const handleChange = () => {
-  console.log('changed');
   p.textContent = '';
 };
 
